@@ -1,12 +1,21 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const Header = () => {
 
   return (
-    <header className="d-flex justify-content-between align-items-center p-3 bg-secondary text-white">
-      <h1 className="m-0">URL Home</h1>      
-    </header>
+<Navbar bg="light" expand="lg">
+  <Navbar.Brand href="#home">URL Homes</Navbar.Brand>
+  <Navbar.Toggle aria-controls="basic-navbar-nav" />
+  <Navbar.Collapse id="basic-navbar-nav">
+    <Nav className="mr-auto">
+      <Nav.Link href="#home">Home</Nav.Link>
+      <Nav.Link href="#link">Link</Nav.Link> 
+    </Nav>
+  </Navbar.Collapse>
+</Navbar>
   );
 };
 
