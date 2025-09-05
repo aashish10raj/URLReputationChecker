@@ -22,7 +22,7 @@ public class SafeBrowsingService {
     @Autowired
     private SafeBrowsingConfig config;
 
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(SafeBrowsingService.class);
+    //private static final org.slf4j.Logger logger = LoggerFactory.getLogger(SafeBrowsingService.class);
 
 
     private final WebClient webClient;
@@ -35,13 +35,13 @@ public class SafeBrowsingService {
     }
 
     public URLReputationResult checkURL(String url) {
-        System.out.println("Using API Key: " + config.getApiKey().substring(0, 20) + "...");
+        //System.out.println("Using API Key: " + config.getApiKey().substring(0, 20) + "...");
         try {
             SafeBrowsingRequest request = createRequest(url);
             // DEBUG: Log the request to see what's being sent
             ObjectMapper mapper = new ObjectMapper();
             String jsonRequest = mapper.writeValueAsString(request);
-            logger.info("Sending request to API "+jsonRequest);
+            //logger.info("Sending request to API "+jsonRequest);
             SafeBrowsingResponse response = webClient
                     .post()
                     .uri(uriBuilder -> uriBuilder
