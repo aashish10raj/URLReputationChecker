@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  # Backend Service - Spring Boot Application
+  backend:
+    build:
+      context: ./Backend/url-reputation-checker
+      dockerfile: Dockerfile
+    container_name: url-checker-backend
+    ports:
+      - "8080:8080"
+    environment:
+      # You can pass environment variables here
+      - SPRING_PROFILES_ACTIVE=prod
+      # Add your API key here (or use .env file)
+      - API_KEY=${API_KEY}
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+  
+  # Frontend Service - React Application  
+  frontend:
+    build:
+      context: ./Frontend/url-reputation-checker
+      dockerfile: Dockerfile
+    container_name: url-checker-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+    restart: unless-stopped
+
+# Define custom network for service communication
+networks:
+  app-network:
+    driver: bridge
